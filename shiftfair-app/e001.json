@@ -1,0 +1,8 @@
+{
+  "pk": {"S": "EMPLOYEE#E001"},
+  "sk": {"S": "PROFILE"},
+  "employee_id": {"S": "E001"},
+  "name": {"S": "Alice Johnson"},
+  "role": {"S": "Nurse"},
+  "department": {"S": "Emergency"}
+}

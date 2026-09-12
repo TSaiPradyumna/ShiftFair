@@ -1,0 +1,31 @@
+[
+  {
+    "uid": { "type": "User", "id": "E001" },
+    "attrs": {
+      "id": "E001",
+      "role": "guard",
+      "current_night_count": 2,
+      "max_night_shifts_per_week": 3
+    },
+    "parents": []
+  },
+  {
+    "uid": { "type": "User", "id": "E002" },
+    "attrs": {
+      "id": "E002",
+      "role": "manager",
+      "current_night_count": 0,
+      "max_night_shifts_per_week": 3
+    },
+    "parents": []
+  },
+  {
+    "uid": { "type": "Shift", "id": "S045" },
+    "attrs": {
+      "shift_type": "night",
+      "hours_since_last_shift": 14,
+      "from_employee": "E001"
+    },
+    "parents": []
+  }
+]

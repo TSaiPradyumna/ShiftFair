@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ShiftFair</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+
+            ShiftFair
+
+            <span>
+                Fair Shift Arbitration
+            </span>
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            System Online
+
+        </div>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <main>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div>
+
+                <h1>
+
+                    Fair Shift Swaps.
+                    <br>
+
+                    Better Teams.
+
+                </h1>
+
+
+                <p>
+
+                    ShiftFair intelligently evaluates
+                    shift swap requests and recommends
+                    eligible partners based on role,
+                    department, and schedule availability.
+
+                </p>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <h3>
+                    🤖 Arbitration Engine
+                </h3>
+
+                <p>
+
+                    Role Matching
+
+                </p>
+
+                <p>
+
+                    Department Matching
+
+                </p>
+
+                <p>
+
+                    Schedule Conflict Detection
+
+                </p>
+
+                <p>
+
+                    Explainable Decisions
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- DASHBOARD CARDS -->
+
+        <section class="dashboard">
+
+
+            <div class="card">
+
+                <h3>
+                    Employees
+                </h3>
+
+                <div
+                    id="employeeCount"
+                    class="big-number"
+                >
+
+                    -
+
+                </div>
+
+                <p>
+
+                    Active staff members
+
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    Shifts
+                </h3>
+
+                <div
+                    id="shiftCount"
+                    class="big-number"
+                >
+
+                    -
+
+                </div>
+
+                <p>
+
+                    Scheduled shifts
+
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    Decisions
+                </h3>
+
+                <div
+                    id="decisionCount"
+                    class="big-number"
+                >
+
+                    -
+
+                </div>
+
+                <p>
+
+                    Arbitration decisions
+
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- SWAP REQUEST -->
+
+        <section class="section">
+
+            <div class="section-title">
+
+                <h2>
+                    Request a Shift Swap
+                </h2>
+
+                <p>
+
+                    Submit your request for
+                    intelligent partner matching.
+
+                </p>
+
+            </div>
+
+
+            <div class="form-card">
+
+
+                <div class="form-group">
+
+                    <label>
+
+                        Employee
+
+                    </label>
+
+
+                    <select id="employeeSelect">
+
+                        <option>
+
+                            Loading employees...
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+
+                        Shift
+
+                    </label>
+
+
+                    <select id="shiftSelect">
+
+                        <option>
+
+                            Loading shifts...
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+
+                        Reason
+
+                    </label>
+
+
+                    <textarea
+                        id="reason"
+                        placeholder="Why do you need to swap this shift?"
+                    ></textarea>
+
+                </div>
+
+
+
+                <button
+                    id="submitSwap"
+                >
+
+                    🔄 Request Fair Swap
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- RESULT -->
+
+        <section
+            class="section"
+            id="resultSection"
+        >
+
+
+            <div class="section-title">
+
+                <h2>
+
+                    Arbitration Result
+
+                </h2>
+
+            </div>
+
+
+            <div
+                id="resultCard"
+                class="result-card hidden"
+            >
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ROSTER -->
+
+        <section class="section">
+
+
+            <div class="section-title">
+
+                <h2>
+
+                    Team Roster
+
+                </h2>
+
+
+                <p>
+
+                    Current employees and
+                    assigned shifts.
+
+                </p>
+
+            </div>
+
+
+            <div
+                id="roster"
+                class="roster-grid"
+            >
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- DECISIONS -->
+
+        <section class="section">
+
+
+            <div class="section-title">
+
+                <h2>
+
+                    Decision History
+
+                </h2>
+
+
+                <p>
+
+                    Previous ShiftFair
+                    arbitration decisions.
+
+                </p>
+
+            </div>
+
+
+            <div
+                id="decisions"
+                class="decisions"
+            >
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        ShiftFair
+
+        ·
+
+        Fair Shift Arbitration System
+
+    </footer>
+
+
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

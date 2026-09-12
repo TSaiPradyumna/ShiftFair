@@ -1,0 +1,119 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Description: ShiftFair - fair shift swap arbitration
+
+
+Globals:
+  Function:
+    Timeout: 60
+    Runtime: python3.13
+
+    Environment:
+      Variables:
+        DYNAMO_ENDPOINT: "http://host.docker.internal:4566"
+        TABLE_NAME: "ShiftFairTable"
+        AWS_DEFAULT_REGION: "us-east-1"
+        AWS_ACCESS_KEY_ID: "test"
+        AWS_SECRET_ACCESS_KEY: "test"
+        AWS_EC2_METADATA_DISABLED: "true"
+
+
+Resources:
+
+
+  # ==========================================================
+  # API GATEWAY WITH CORS
+  # ==========================================================
+
+  ShiftFairApi:
+    Type: AWS::Serverless::Api
+
+    Properties:
+      StageName: Prod
+
+      Cors:
+        AllowOrigin: "'http://localhost:5500'"
+        AllowHeaders: "'Content-Type'"
+        AllowMethods: "'GET,POST,OPTIONS'"
+
+
+  # ==========================================================
+  # SWAP REQUEST FUNCTION
+  # ==========================================================
+
+  SwapRequestFunction:
+    Type: AWS::Serverless::Function
+
+    Properties:
+      CodeUri: swap_request/
+      Handler: app.lambda_handler
+
+      Events:
+
+        SwapApi:
+
+          Type: Api
+
+          Properties:
+
+            RestApiId:
+              !Ref ShiftFairApi
+
+            Path: /swap-request
+
+            Method: post
+
+
+  # ==========================================================
+  # ROSTER FUNCTION
+  # ==========================================================
+
+  RosterFunction:
+    Type: AWS::Serverless::Function
+
+    Properties:
+      CodeUri: roster/
+      Handler: app.lambda_handler
+
+      Events:
+
+        RosterApi:
+
+          Type: Api
+
+          Properties:
+
+            RestApiId:
+              !Ref ShiftFairApi
+
+            Path: /roster
+
+            Method: get
+
+
+  # ==========================================================
+  # DECISIONS FUNCTION
+  # ==========================================================
+
+  DecisionsFunction:
+    Type: AWS::Serverless::Function
+
+    Properties:
+      CodeUri: decisions/
+      Handler: app.lambda_handler
+
+      Events:
+
+        DecisionsApi:
+
+          Type: Api
+
+          Properties:
+
+            RestApiId:
+              !Ref ShiftFairApi
+
+            Path: /decisions
+
+            Method: get
