@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,423 +9,1145 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>ShiftFair</title>
+    <meta
+        name="theme-color"
+        content="#06100f"
+    >
+
+    <meta
+        name="description"
+        content="ShiftFair — explainable, policy-driven shift arbitration."
+    >
+
+    <title>
+        ShiftFair — Fair Shift Arbitration
+    </title>
+
+    <link
+        rel="icon"
+        href="data:,"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <link
         rel="stylesheet"
         href="style.css"
     >
-
 </head>
 
 
 <body>
 
+    <!-- =====================================================
+         BACKGROUND
+         ===================================================== -->
 
-    <!-- HEADER -->
+    <div
+        class="background-grid"
+        aria-hidden="true"
+    ></div>
 
-    <header>
-
-        <div class="logo">
-
-            ShiftFair
-
-            <span>
-                Fair Shift Arbitration
-            </span>
-
-        </div>
+    <div
+        class="scanline"
+        aria-hidden="true"
+    ></div>
 
 
-        <div class="status">
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
 
-            <span class="status-dot"></span>
+    <header
+        class="site-header"
+        id="top"
+    >
 
-            System Online
+        <div class="header-inner">
+
+            <a
+                class="brand"
+                href="#top"
+                aria-label="ShiftFair home"
+            >
+
+                <span class="brand-mark">
+                    <span>S</span>
+                    <i></i>
+                </span>
+
+                <span class="brand-copy">
+
+                    <strong>
+                        SHIFTFAIR
+                    </strong>
+
+                    <small>
+                        FAIR SHIFT ARBITRATION
+                    </small>
+
+                </span>
+
+            </a>
+
+
+            <nav
+                class="main-nav"
+                aria-label="Primary navigation"
+            >
+
+                <a href="#request">
+                    Request
+                    <b>01</b>
+                </a>
+
+                <a href="#roster">
+                    Roster
+                    <b>02</b>
+                </a>
+
+                <a href="#history">
+                    History
+                    <b>03</b>
+                </a>
+
+            </nav>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Switch theme"
+                >
+
+                    <span class="theme-icon">
+                        ◐
+                    </span>
+
+                    <span class="theme-label">
+                        DARK
+                    </span>
+
+                </button>
+
+
+                <span class="system-status">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        LIVE
+                    </span>
+
+                </span>
+
+            </div>
+
+
+            <button
+                class="mobile-menu"
+                id="mobileMenu"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+
+                <span></span>
+                <span></span>
+
+            </button>
 
         </div>
 
     </header>
 
 
-
-    <!-- MAIN -->
-
     <main>
 
 
-        <!-- HERO -->
-
-        <section class="hero">
-
-            <div>
-
-                <h1>
-
-                    Fair Shift Swaps.
-                    <br>
-
-                    Better Teams.
-
-                </h1>
-
-
-                <p>
-
-                    ShiftFair intelligently evaluates
-                    shift swap requests and recommends
-                    eligible partners based on role,
-                    department, and schedule availability.
-
-                </p>
-
-            </div>
-
-
-            <div class="hero-card">
-
-                <h3>
-                    🤖 Arbitration Engine
-                </h3>
-
-                <p>
-
-                    Role Matching
-
-                </p>
-
-                <p>
-
-                    Department Matching
-
-                </p>
-
-                <p>
-
-                    Schedule Conflict Detection
-
-                </p>
-
-                <p>
-
-                    Explainable Decisions
-
-                </p>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- DASHBOARD CARDS -->
-
-        <section class="dashboard">
-
-
-            <div class="card">
-
-                <h3>
-                    Employees
-                </h3>
-
-                <div
-                    id="employeeCount"
-                    class="big-number"
-                >
-
-                    -
-
-                </div>
-
-                <p>
-
-                    Active staff members
-
-                </p>
-
-            </div>
-
-
-
-            <div class="card">
-
-                <h3>
-                    Shifts
-                </h3>
-
-                <div
-                    id="shiftCount"
-                    class="big-number"
-                >
-
-                    -
-
-                </div>
-
-                <p>
-
-                    Scheduled shifts
-
-                </p>
-
-            </div>
-
-
-
-            <div class="card">
-
-                <h3>
-                    Decisions
-                </h3>
-
-                <div
-                    id="decisionCount"
-                    class="big-number"
-                >
-
-                    -
-
-                </div>
-
-                <p>
-
-                    Arbitration decisions
-
-                </p>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- SWAP REQUEST -->
-
-        <section class="section">
-
-            <div class="section-title">
-
-                <h2>
-                    Request a Shift Swap
-                </h2>
-
-                <p>
-
-                    Submit your request for
-                    intelligent partner matching.
-
-                </p>
-
-            </div>
-
-
-            <div class="form-card">
-
-
-                <div class="form-group">
-
-                    <label>
-
-                        Employee
-
-                    </label>
-
-
-                    <select id="employeeSelect">
-
-                        <option>
-
-                            Loading employees...
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-
-                <div class="form-group">
-
-                    <label>
-
-                        Shift
-
-                    </label>
-
-
-                    <select id="shiftSelect">
-
-                        <option>
-
-                            Loading shifts...
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-
-                <div class="form-group">
-
-                    <label>
-
-                        Reason
-
-                    </label>
-
-
-                    <textarea
-                        id="reason"
-                        placeholder="Why do you need to swap this shift?"
-                    ></textarea>
-
-                </div>
-
-
-
-                <button
-                    id="submitSwap"
-                >
-
-                    🔄 Request Fair Swap
-
-                </button>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- RESULT -->
+        <!-- =================================================
+             HERO
+             ================================================= -->
 
         <section
-            class="section"
-            id="resultSection"
+            class="hero"
+            id="overview"
         >
 
+            <div
+                class="hero-grid-bg"
+                aria-hidden="true"
+            ></div>
 
-            <div class="section-title">
 
-                <h2>
+            <div class="hero-content">
 
-                    Arbitration Result
+                <div class="eyebrow reveal">
 
-                </h2>
+                    <span class="eyebrow-index">
+                        SYS.01
+                    </span>
+
+                    CEDAR × STRANDS × DYNAMODB
+
+                </div>
+
+
+                <div
+                    class="kinetic-title"
+                    aria-label="fair shift swaps"
+                >
+
+                    <div
+                        class="kinetic-word"
+                        data-kinetic="fair"
+                    >
+                        <span>f</span>
+                        <span>a</span>
+                        <span>i</span>
+                        <span>r</span>
+                    </div>
+
+
+                    <div
+                        class="kinetic-word outline"
+                        data-kinetic="shift"
+                    >
+                        <span>s</span>
+                        <span>h</span>
+                        <span>i</span>
+                        <span>f</span>
+                        <span>t</span>
+                    </div>
+
+
+                    <div
+                        class="kinetic-word"
+                        data-kinetic="swaps"
+                    >
+                        <span>s</span>
+                        <span>w</span>
+                        <span>a</span>
+                        <span>p</span>
+                        <span>s</span>
+                        <em>.</em>
+                    </div>
+
+                </div>
+
+
+                <p class="hero-description reveal">
+
+                    A policy-driven arbitration layer that
+                    evaluates shift swaps, checks compatibility,
+                    and returns an explainable decision.
+
+                </p>
+
+
+                <div class="hero-actions reveal">
+
+                    <a
+                        class="hero-cta"
+                        href="#request"
+                    >
+
+                        <span>
+                            START ARBITRATION
+                        </span>
+
+                        <b>
+                            ↘
+                        </b>
+
+                    </a>
+
+
+                    <span class="hero-note">
+
+                        NO BLACK BOX.<br>
+                        EVERY DECISION HAS A REASON.
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TERMINAL -->
+
+            <div class="hero-terminal-wrap reveal">
+
+                <div class="terminal-badge">
+
+                    ARBITRATION ENGINE
+
+                    <span>
+                        ● READY
+                    </span>
+
+                </div>
+
+
+                <div class="hero-terminal">
+
+                    <div class="terminal-header">
+
+                        <div class="terminal-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <span>
+                            shiftfair://engine
+                        </span>
+
+                        <small>
+                            v1.0
+                        </small>
+
+                    </div>
+
+
+                    <div
+                        class="terminal-body"
+                        id="heroTerminalBody"
+                    >
+
+                        <div class="terminal-line">
+
+                            <span class="terminal-prompt">
+                                $
+                            </span>
+
+                            <span>
+                                shiftfair.request()
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-line muted">
+
+                            <span>
+                                01
+                            </span>
+
+                            <span>
+                                loading roster........
+                                <b>OK</b>
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-line muted">
+
+                            <span>
+                                02
+                            </span>
+
+                            <span>
+                                matching constraints...
+                                <b>OK</b>
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-line muted">
+
+                            <span>
+                                03
+                            </span>
+
+                            <span>
+                                cedar authorization....
+                                <b>ALLOW</b>
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-line success">
+
+                            <span>
+                                04
+                            </span>
+
+                            <span>
+                                decision generated
+                                <strong>✓</strong>
+                            </span>
+
+                        </div>
+
+
+                        <div class="terminal-output">
+
+                            <span>
+                                →
+                            </span>
+
+                            explainable arbitration ready
+
+                            <span class="cursor"></span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="terminal-footer">
+
+                        <span>
+                            LOCALSTACK
+                        </span>
+
+                        <span>
+                            CEDAR
+                        </span>
+
+                        <span>
+                            DYNAMODB
+                        </span>
+
+                        <span>
+                            API :3000
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LIVE TICKER
+             ================================================= -->
+
+        <section
+            class="live-ticker"
+            aria-label="Live arbitration feed"
+        >
+
+            <div
+                class="ticker-track"
+                id="tickerTrack"
+            >
+
+                <span>
+                    RISK_CHECK
+                    <b>OK</b>
+                </span>
+
+                <i>/</i>
+
+                <span>
+                    FAIRNESS_ENGINE
+                    <b>READY</b>
+                </span>
+
+                <i>/</i>
+
+                <span>
+                    CEDAR_POLICY
+                    <b>ACTIVE</b>
+                </span>
+
+                <i>/</i>
+
+                <span>
+                    SHIFT_MATCH
+                    <b>SCANNING</b>
+                </span>
+
+                <i>/</i>
+
+                <span>
+                    EXPLAINABILITY
+                    <b>100%</b>
+                </span>
+
+                <i>/</i>
+
+
+                <span>
+                    RISK_CHECK
+                    <b>OK</b>
+                </span>
+
+                <i>/</i>
+
+                <span>
+                    FAIRNESS_ENGINE
+                    <b>READY</b>
+                </span>
+
+                <i>/</i>
+
+                <span>
+                    CEDAR_POLICY
+                    <b>ACTIVE</b>
+                </span>
+
+                <i>/</i>
+
+                <span>
+                    SHIFT_MATCH
+                    <b>SCANNING</b>
+                </span>
+
+                <i>/</i>
+
+                <span>
+                    EXPLAINABILITY
+                    <b>100%</b>
+                </span>
+
+                <i>/</i>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STATISTICS
+             ================================================= -->
+
+        <section
+            class="stats-section"
+            aria-label="System statistics"
+        >
+
+            <div class="stats-intro reveal">
+
+                <span>
+                    LIVE SYSTEM
+                </span>
+
+                <p>
+                    What the arbitration layer sees right now.
+                </p>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <article class="stat-card reveal">
+
+                    <span class="stat-index">
+                        01
+                    </span>
+
+                    <small>
+                        EMPLOYEES
+                    </small>
+
+                    <strong
+                        id="employeeCount"
+                        data-value="0"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        active roster
+                    </span>
+
+                    <i></i>
+
+                </article>
+
+
+                <article class="stat-card reveal">
+
+                    <span class="stat-index">
+                        02
+                    </span>
+
+                    <small>
+                        SHIFTS
+                    </small>
+
+                    <strong
+                        id="shiftCount"
+                        data-value="0"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        available assignments
+                    </span>
+
+                    <i></i>
+
+                </article>
+
+
+                <article class="stat-card reveal">
+
+                    <span class="stat-index">
+                        03
+                    </span>
+
+                    <small>
+                        DECISIONS
+                    </small>
+
+                    <strong
+                        id="decisionCount"
+                        data-value="0"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        processed requests
+                    </span>
+
+                    <i></i>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STORY
+             ================================================= -->
+
+        <section
+            class="story-section reveal"
+            id="story"
+        >
+
+            <div class="story-rail">
+
+                <span>
+                    THE LOOP
+                </span>
+
+                <div></div>
+
+                <b>
+                    01—03
+                </b>
+
+            </div>
+
+
+            <div class="story-panels">
+
+                <article class="story-panel">
+
+                    <div class="story-number">
+                        01
+                    </div>
+
+                    <div class="story-word">
+                        <span>S</span>
+                        <span>E</span>
+                        <span>E</span>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            See the shift.
+                        </h2>
+
+                        <p>
+                            Start with the roster.
+                            Every employee and assigned
+                            shift becomes part of the
+                            arbitration context.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="story-panel">
+
+                    <div class="story-number">
+                        02
+                    </div>
+
+                    <div class="story-word">
+                        <span>T</span>
+                        <span>E</span>
+                        <span>S</span>
+                        <span>T</span>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Test the rules.
+                        </h2>
+
+                        <p>
+                            Compatibility, workload,
+                            rest, skill and policy
+                            constraints are evaluated
+                            before a swap proceeds.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="story-panel">
+
+                    <div class="story-number">
+                        03
+                    </div>
+
+                    <div class="story-word">
+                        <span>A</span>
+                        <span>C</span>
+                        <span>T</span>
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Act on evidence.
+                        </h2>
+
+                        <p>
+                            The engine returns an
+                            explainable outcome and,
+                            when eligible, a suggested
+                            swap partner.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REQUEST
+             ================================================= -->
+
+        <section
+            class="content-section reveal"
+            id="request"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-eyebrow">
+                        01 // REQUEST
+                    </div>
+
+                    <h2>
+                        Request a fair swap
+                        <span class="heading-dot">.</span>
+                    </h2>
+
+                </div>
+
+
+                <div class="section-description">
+
+                    Submit a shift change. Let the
+                    arbitration engine decide what can
+                    move, why, and with whom.
+
+                </div>
+
+            </div>
+
+
+            <div class="request-card">
+
+                <div class="request-topline">
+
+                    <span>
+                        NEW ARBITRATION REQUEST
+                    </span>
+
+                    <span class="request-code">
+                        POST /swap-request
+                    </span>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="employeeSelect">
+                            EMPLOYEE
+                        </label>
+
+                        <div class="field-shell">
+
+                            <span>
+                                01
+                            </span>
+
+                            <select id="employeeSelect">
+
+                                <option value="">
+                                    Loading employees...
+                                </option>
+
+                            </select>
+
+                            <b>
+                                ⌄
+                            </b>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="shiftSelect">
+                            SHIFT
+                        </label>
+
+                        <div class="field-shell">
+
+                            <span>
+                                02
+                            </span>
+
+                            <select id="shiftSelect">
+
+                                <option value="">
+                                    Loading shifts...
+                                </option>
+
+                            </select>
+
+                            <b>
+                                ⌄
+                            </b>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="reason">
+                        REASON FOR SWAP
+                    </label>
+
+                    <div class="textarea-shell">
+
+                        <span>
+                            //
+                        </span>
+
+                        <textarea
+                            id="reason"
+                            rows="4"
+                            placeholder="Explain why this shift needs to move..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        id="submitSwap"
+                        class="primary-button"
+                        type="button"
+                    >
+
+                        <span>
+                            REQUEST FAIR SWAP
+                        </span>
+
+                        <b>
+                            ↗
+                        </b>
+
+                    </button>
+
+
+                    <span class="form-note">
+
+                        <i></i>
+
+                        Cedar policies will evaluate
+                        the request
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RESULT
+             ================================================= -->
+
+        <section
+            id="resultSection"
+            class="content-section result-section hidden reveal"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-eyebrow">
+                        02 // ARBITRATION RESULT
+                    </div>
+
+                    <h2>
+                        Decision generated
+                        <span class="heading-dot">.</span>
+                    </h2>
+
+                </div>
 
             </div>
 
 
             <div
                 id="resultCard"
-                class="result-card hidden"
-            >
-
-            </div>
-
+                class="result-card"
+            ></div>
 
         </section>
 
 
+        <!-- =================================================
+             ROSTER
+             ================================================= -->
 
-        <!-- ROSTER -->
+        <section
+            class="content-section reveal"
+            id="roster"
+        >
 
-        <section class="section">
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-eyebrow">
+                        03 // ROSTER
+                    </div>
+
+                    <h2>
+                        Current roster
+                        <span class="heading-dot">.</span>
+                    </h2>
+
+                </div>
 
 
-            <div class="section-title">
+                <div class="section-description">
 
-                <h2>
+                    The people and shifts currently visible
+                    to the arbitration engine.
 
-                    Team Roster
-
-                </h2>
-
-
-                <p>
-
-                    Current employees and
-                    assigned shifts.
-
-                </p>
+                </div>
 
             </div>
 
 
             <div
-                id="roster"
+                id="rosterGrid"
                 class="roster-grid"
             >
 
-            </div>
+                <div class="loading-state">
+                    LOADING ROSTER...
+                </div>
 
+            </div>
 
         </section>
 
 
+        <!-- =================================================
+             HISTORY
+             ================================================= -->
 
-        <!-- DECISIONS -->
+        <section
+            class="content-section reveal"
+            id="history"
+        >
 
-        <section class="section">
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-eyebrow">
+                        04 // DECISION STREAM
+                    </div>
+
+                    <h2>
+                        Arbitration history
+                        <span class="heading-dot">.</span>
+                    </h2>
+
+                </div>
 
 
-            <div class="section-title">
+                <div class="section-description">
 
-                <h2>
+                    A compact event stream of previous
+                    decisions stored in DynamoDB.
 
-                    Decision History
-
-                </h2>
-
-
-                <p>
-
-                    Previous ShiftFair
-                    arbitration decisions.
-
-                </p>
+                </div>
 
             </div>
 
 
-            <div
-                id="decisions"
-                class="decisions"
-            >
+            <div class="history-shell">
+
+                <div class="history-header">
+
+                    <span>
+                        STATUS
+                    </span>
+
+                    <span>
+                        ROUTE
+                    </span>
+
+                    <span>
+                        DECISION
+                    </span>
+
+                    <span>
+                        REQUEST
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="decisions"
+                    class="decisions-list"
+                >
+
+                    <div class="loading-state">
+                        LOADING DECISIONS...
+                    </div>
+
+                </div>
 
             </div>
-
 
         </section>
-
 
     </main>
 
 
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
 
-    <!-- FOOTER -->
+    <footer class="site-footer">
 
-    <footer>
+        <div class="footer-inner">
 
-        ShiftFair
+            <div class="footer-brand">
 
-        ·
+                <span>
+                    ◈
+                </span>
 
-        Fair Shift Arbitration System
+                <strong>
+                    SHIFTFAIR
+                </strong>
+
+                <small>
+                    FAIR SHIFT ARBITRATION SYSTEM
+                </small>
+
+            </div>
+
+
+            <div class="footer-center">
+
+                BUILT AROUND EXPLAINABILITY
+
+                <span>
+                    ·
+                </span>
+
+                POLICY
+
+                <span>
+                    ·
+                </span>
+
+                FAIRNESS
+
+            </div>
+
+
+            <div class="footer-tech">
+
+                CEDAR · STRANDS · DYNAMODB · LOCALSTACK
+
+            </div>
+
+        </div>
 
     </footer>
 
 
-
     <script src="script.js"></script>
-
 
 </body>
 

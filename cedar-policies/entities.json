@@ -3,9 +3,21 @@
     "uid": { "type": "User", "id": "E001" },
     "attrs": {
       "id": "E001",
-      "role": "guard",
+      "role": "nurse",
+      "department": "Emergency",
+      "weekly_hours": 32,
+      "maximum_weekly_hours": 48,
+      "skill_level": 4,
+      "consecutive_working_days": 2,
+      "maximum_consecutive_days": 5,
+      "minimum_notice_hours": 12,
+      "previous_swap_count": 1,
+      "maximum_swap_count": 3,
+      "experience_years": 4,
+      "performance_score": 92,
       "current_night_count": 2,
-      "max_night_shifts_per_week": 3
+      "max_night_shifts_per_week": 3,
+      "minimum_rest_hours": 10
     },
     "parents": []
   },
@@ -13,17 +25,78 @@
     "uid": { "type": "User", "id": "E002" },
     "attrs": {
       "id": "E002",
-      "role": "manager",
+      "role": "nurse",
+      "department": "Emergency",
+      "weekly_hours": 24,
+      "maximum_weekly_hours": 48,
+      "skill_level": 5,
+      "consecutive_working_days": 1,
+      "maximum_consecutive_days": 5,
+      "minimum_notice_hours": 12,
+      "previous_swap_count": 0,
+      "maximum_swap_count": 3,
+      "experience_years": 6,
+      "performance_score": 95,
+      "current_night_count": 1,
+      "max_night_shifts_per_week": 3,
+      "minimum_rest_hours": 10
+    },
+    "parents": []
+  },
+  {
+    "uid": { "type": "User", "id": "E003" },
+    "attrs": {
+      "id": "E003",
+      "role": "nurse",
+      "department": "Emergency",
+      "weekly_hours": 40,
+      "maximum_weekly_hours": 48,
+      "skill_level": 3,
+      "consecutive_working_days": 4,
+      "maximum_consecutive_days": 5,
+      "minimum_notice_hours": 12,
+      "previous_swap_count": 2,
+      "maximum_swap_count": 3,
+      "experience_years": 3,
+      "performance_score": 88,
+      "current_night_count": 2,
+      "max_night_shifts_per_week": 3,
+      "minimum_rest_hours": 10
+    },
+    "parents": []
+  },
+  {
+    "uid": { "type": "User", "id": "E004" },
+    "attrs": {
+      "id": "E004",
+      "role": "nurse",
+      "department": "Emergency",
+      "weekly_hours": 16,
+      "maximum_weekly_hours": 48,
+      "skill_level": 4,
+      "consecutive_working_days": 1,
+      "maximum_consecutive_days": 5,
+      "minimum_notice_hours": 12,
+      "previous_swap_count": 0,
+      "maximum_swap_count": 3,
+      "experience_years": 2,
+      "performance_score": 90,
       "current_night_count": 0,
-      "max_night_shifts_per_week": 3
+      "max_night_shifts_per_week": 3,
+      "minimum_rest_hours": 10
     },
     "parents": []
   },
   {
     "uid": { "type": "Shift", "id": "S045" },
     "attrs": {
-      "shift_type": "night",
+      "shift_type": "day",
+      "shift_hours": 8,
       "hours_since_last_shift": 14,
+      "required_skill_level": 3,
+      "notice_hours": 24,
+      "required_experience_years": 2,
+      "minimum_performance_score": 80,
       "from_employee": "E001"
     },
     "parents": []

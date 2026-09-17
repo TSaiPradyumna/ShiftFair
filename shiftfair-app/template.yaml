@@ -4,38 +4,90 @@ Transform: AWS::Serverless-2016-10-31
 Description: ShiftFair - fair shift swap arbitration
 
 
+# ============================================================
+# GLOBAL FUNCTION SETTINGS
+# ============================================================
+
 Globals:
+
   Function:
+
     Timeout: 60
+
     Runtime: python3.13
 
     Environment:
+
       Variables:
+
         DYNAMO_ENDPOINT: "http://host.docker.internal:4566"
+
         TABLE_NAME: "ShiftFairTable"
+
         AWS_DEFAULT_REGION: "us-east-1"
+
         AWS_ACCESS_KEY_ID: "test"
+
         AWS_SECRET_ACCESS_KEY: "test"
+
         AWS_EC2_METADATA_DISABLED: "true"
 
+
+# ============================================================
+# RESOURCES
+# ============================================================
 
 Resources:
 
 
   # ==========================================================
-  # API GATEWAY WITH CORS
+  # API
   # ==========================================================
 
   ShiftFairApi:
+
     Type: AWS::Serverless::Api
 
     Properties:
+
       StageName: Prod
 
       Cors:
+
         AllowOrigin: "'http://127.0.0.1:5500'"
+
         AllowHeaders: "'Content-Type'"
+
         AllowMethods: "'GET,POST,OPTIONS'"
+
+
+
+  # ==========================================================
+  # CEDAR POLICY LAYER
+  #
+  # Packages the contents of:
+  #
+  # ../cedar-policies/
+  #
+  # into /opt inside the Lambda container.
+  # ==========================================================
+
+  CedarPolicyLayer:
+
+    Type: AWS::Serverless::LayerVersion
+
+    Properties:
+
+      LayerName: ShiftFairCedarPolicies
+
+      Description: Cedar policies used by ShiftFair authorization
+
+      ContentUri: ../cedar-policies/
+
+      CompatibleRuntimes:
+
+        - python3.13
+
 
 
   # ==========================================================
@@ -43,11 +95,18 @@ Resources:
   # ==========================================================
 
   SwapRequestFunction:
+
     Type: AWS::Serverless::Function
 
     Properties:
+
       CodeUri: swap_request/
+
       Handler: app.lambda_handler
+
+      Layers:
+
+        - !Ref CedarPolicyLayer
 
       Events:
 
@@ -57,12 +116,12 @@ Resources:
 
           Properties:
 
-            RestApiId:
-              !Ref ShiftFairApi
+            RestApiId: !Ref ShiftFairApi
 
             Path: /swap-request
 
             Method: post
+
 
 
   # ==========================================================
@@ -70,10 +129,13 @@ Resources:
   # ==========================================================
 
   RosterFunction:
+
     Type: AWS::Serverless::Function
 
     Properties:
+
       CodeUri: roster/
+
       Handler: app.lambda_handler
 
       Events:
@@ -84,12 +146,12 @@ Resources:
 
           Properties:
 
-            RestApiId:
-              !Ref ShiftFairApi
+            RestApiId: !Ref ShiftFairApi
 
             Path: /roster
 
             Method: get
+
 
 
   # ==========================================================
@@ -97,10 +159,13 @@ Resources:
   # ==========================================================
 
   DecisionsFunction:
+
     Type: AWS::Serverless::Function
 
     Properties:
+
       CodeUri: decisions/
+
       Handler: app.lambda_handler
 
       Events:
@@ -111,8 +176,7 @@ Resources:
 
           Properties:
 
-            RestApiId:
-              !Ref ShiftFairApi
+            RestApiId: !Ref ShiftFairApi
 
             Path: /decisions
 

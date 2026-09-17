@@ -3,6 +3,7 @@ import os
 import uuid
 import time
 
+
 # ============================================================
 # AWS ENVIRONMENT
 # ============================================================
@@ -23,6 +24,8 @@ from botocore.exceptions import (
     ConnectTimeoutError,
     ReadTimeoutError
 )
+
+from cedar_check import authorize_assignment
 
 
 # ============================================================
@@ -52,7 +55,9 @@ def get_dynamodb_resource():
         f"Using endpoint: {DYNAMO_ENDPOINT}"
     )
 
-    print("Creating explicit boto3 session...")
+    print(
+        "Creating explicit boto3 session..."
+    )
 
     session = boto3.Session(
         aws_access_key_id="test",
@@ -60,7 +65,9 @@ def get_dynamodb_resource():
         region_name="us-east-1"
     )
 
-    print("Boto3 session created")
+    print(
+        "Boto3 session created"
+    )
 
     dynamodb_config = Config(
         connect_timeout=5,
@@ -71,7 +78,9 @@ def get_dynamodb_resource():
         }
     )
 
-    print("Creating DynamoDB resource...")
+    print(
+        "Creating DynamoDB resource..."
+    )
 
     dynamodb = session.resource(
         "dynamodb",
@@ -546,36 +555,10 @@ def lambda_handler(
 
 
     # --------------------------------------------------------
-    # CEDAR PLACEHOLDER
-    # --------------------------------------------------------
-
-    cedar_allowed = True
-
-    cedar_reason = (
-        "Placeholder: Cedar authorization "
-        "check approved"
-    )
-
-
-    if not cedar_allowed:
-
-        return _response(
-            403,
-            {
-                "request_id":
-                    request_id,
-
-                "status":
-                    "denied",
-
-                "reason":
-                    cedar_reason
-            }
-        )
-
-
-    # --------------------------------------------------------
     # DYNAMODB OPERATIONS
+    #
+    # We load the roster BEFORE Cedar because Cedar must
+    # authorize using the actual employee and shift data.
     # --------------------------------------------------------
 
     try:
@@ -757,6 +740,100 @@ def lambda_handler(
 
 
         # ----------------------------------------------------
+        # CEDAR AUTHORIZATION
+        # ----------------------------------------------------
+
+        print(
+            "Running Cedar authorization..."
+        )
+
+        cedar_start = time.time()
+
+
+        cedar_result = (
+            authorize_assignment(
+                requesting_employee,
+                requested_shift,
+                employees
+            )
+        )
+
+
+        print(
+            "Cedar authorization completed "
+            f"in {time.time() - cedar_start:.2f} "
+            "seconds"
+        )
+
+
+        cedar_allowed = cedar_result.get(
+            "allowed",
+            False
+        )
+
+        cedar_reason = cedar_result.get(
+            "reason",
+            "Cedar authorization denied."
+        )
+
+
+        # ----------------------------------------------------
+        # CEDAR DENIAL
+        # ----------------------------------------------------
+
+        if not cedar_allowed:
+
+            print(
+                "================================"
+            )
+
+            print(
+                "CEDAR DENIED THE REQUEST"
+            )
+
+            print(
+                "================================"
+            )
+
+
+            return _response(
+                403,
+                {
+                    "request_id":
+                        request_id,
+
+                    "status":
+                        "denied",
+
+                    "reason":
+                        cedar_reason,
+
+                    "cedar_decision":
+                        cedar_result.get(
+                            "decision"
+                        )
+                }
+            )
+
+
+        # ----------------------------------------------------
+        # CEDAR APPROVED
+        # ----------------------------------------------------
+
+        print(
+            "================================"
+        )
+
+        print(
+            "CEDAR APPROVED THE REQUEST"
+        )
+
+        print(
+            "================================"
+        )
+
+
+        # ----------------------------------------------------
         # FIND ELIGIBLE PARTNERS
         # ----------------------------------------------------
 
@@ -831,6 +908,12 @@ def lambda_handler(
                 "eligible_partner_count":
                     0,
 
+                "cedar_decision":
+                    "ALLOW",
+
+                "cedar_reason":
+                    cedar_reason,
+
                 "explanation":
                     explanation,
 
@@ -858,6 +941,9 @@ def lambda_handler(
 
                     "eligible_partner_count":
                         0,
+
+                    "cedar_decision":
+                        "ALLOW",
 
                     "explanation":
                         explanation
@@ -948,6 +1034,12 @@ def lambda_handler(
             "eligible_partner_count":
                 len(partners),
 
+            "cedar_decision":
+                "ALLOW",
+
+            "cedar_reason":
+                cedar_reason,
+
             "explanation":
                 explanation,
 
@@ -1027,6 +1119,33 @@ def lambda_handler(
 
 
     # --------------------------------------------------------
+    # CEDAR / POLICY ERROR
+    # --------------------------------------------------------
+
+    except FileNotFoundError as e:
+
+        print(
+            "Cedar policy file error:"
+        )
+
+        print(
+            str(e)
+        )
+
+
+        return _response(
+            500,
+            {
+                "error":
+                    "Cedar policy configuration error",
+
+                "details":
+                    str(e)
+            }
+        )
+
+
+    # --------------------------------------------------------
     # UNEXPECTED ERROR
     # --------------------------------------------------------
 
@@ -1094,6 +1213,9 @@ def lambda_handler(
             "eligible_partner_count":
                 len(partners),
 
+            "cedar_decision":
+                "ALLOW",
+
             "explanation":
                 explanation
         }
@@ -1117,7 +1239,16 @@ def _response(
         "headers": {
 
             "Content-Type":
-                "application/json"
+                "application/json",
+
+            "Access-Control-Allow-Origin":
+                "http://127.0.0.1:5500",
+
+            "Access-Control-Allow-Headers":
+                "Content-Type",
+
+            "Access-Control-Allow-Methods":
+                "GET,POST,OPTIONS"
         },
 
         "body":

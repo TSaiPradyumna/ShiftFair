@@ -35,6 +35,8 @@ table = dynamodb.Table(TABLE_NAME)
 
 # ============================================================
 # EMPLOYEE DATA
+#
+# These attributes are used by the Cedar fairness policies.
 # ============================================================
 
 employees = [
@@ -45,7 +47,22 @@ employees = [
         "employee_id": "E001",
         "name": "Alice Johnson",
         "role": "Nurse",
-        "department": "Emergency"
+        "department": "Emergency",
+
+        # Cedar fairness attributes
+        "weekly_hours": 32,
+        "maximum_weekly_hours": 48,
+        "skill_level": 4,
+        "consecutive_working_days": 2,
+        "maximum_consecutive_days": 5,
+        "minimum_notice_hours": 12,
+        "previous_swap_count": 1,
+        "maximum_swap_count": 3,
+        "experience_years": 4,
+        "performance_score": 92,
+        "current_night_count": 2,
+        "max_night_shifts_per_week": 3,
+        "minimum_rest_hours": 10
     },
 
     {
@@ -54,7 +71,22 @@ employees = [
         "employee_id": "E002",
         "name": "Bob Smith",
         "role": "Nurse",
-        "department": "Emergency"
+        "department": "Emergency",
+
+        # Cedar fairness attributes
+        "weekly_hours": 24,
+        "maximum_weekly_hours": 48,
+        "skill_level": 5,
+        "consecutive_working_days": 1,
+        "maximum_consecutive_days": 5,
+        "minimum_notice_hours": 12,
+        "previous_swap_count": 0,
+        "maximum_swap_count": 3,
+        "experience_years": 6,
+        "performance_score": 95,
+        "current_night_count": 1,
+        "max_night_shifts_per_week": 3,
+        "minimum_rest_hours": 10
     },
 
     {
@@ -63,7 +95,22 @@ employees = [
         "employee_id": "E003",
         "name": "Carol Davis",
         "role": "Nurse",
-        "department": "Emergency"
+        "department": "Emergency",
+
+        # Cedar fairness attributes
+        "weekly_hours": 40,
+        "maximum_weekly_hours": 48,
+        "skill_level": 3,
+        "consecutive_working_days": 4,
+        "maximum_consecutive_days": 5,
+        "minimum_notice_hours": 12,
+        "previous_swap_count": 2,
+        "maximum_swap_count": 3,
+        "experience_years": 3,
+        "performance_score": 88,
+        "current_night_count": 2,
+        "max_night_shifts_per_week": 3,
+        "minimum_rest_hours": 10
     },
 
     {
@@ -72,13 +119,30 @@ employees = [
         "employee_id": "E004",
         "name": "David Wilson",
         "role": "Nurse",
-        "department": "Emergency"
+        "department": "Emergency",
+
+        # Cedar fairness attributes
+        "weekly_hours": 16,
+        "maximum_weekly_hours": 48,
+        "skill_level": 4,
+        "consecutive_working_days": 1,
+        "maximum_consecutive_days": 5,
+        "minimum_notice_hours": 12,
+        "previous_swap_count": 0,
+        "maximum_swap_count": 3,
+        "experience_years": 2,
+        "performance_score": 90,
+        "current_night_count": 0,
+        "max_night_shifts_per_week": 3,
+        "minimum_rest_hours": 10
     }
 ]
 
 
 # ============================================================
 # SHIFT DATA
+#
+# These attributes are used by the Cedar fairness policies.
 # ============================================================
 
 shifts = [
@@ -90,7 +154,16 @@ shifts = [
         "employee_id": "E001",
         "date": "2026-09-15",
         "start_time": "08:00",
-        "end_time": "16:00"
+        "end_time": "16:00",
+
+        # Cedar attributes
+        "shift_type": "day",
+        "shift_hours": 8,
+        "hours_since_last_shift": 14,
+        "required_skill_level": 3,
+        "notice_hours": 24,
+        "required_experience_years": 2,
+        "minimum_performance_score": 80
     },
 
     {
@@ -100,7 +173,16 @@ shifts = [
         "employee_id": "E002",
         "date": "2026-09-15",
         "start_time": "08:00",
-        "end_time": "16:00"
+        "end_time": "16:00",
+
+        # Cedar attributes
+        "shift_type": "day",
+        "shift_hours": 8,
+        "hours_since_last_shift": 14,
+        "required_skill_level": 3,
+        "notice_hours": 24,
+        "required_experience_years": 2,
+        "minimum_performance_score": 80
     },
 
     {
@@ -110,7 +192,16 @@ shifts = [
         "employee_id": "E003",
         "date": "2026-09-16",
         "start_time": "08:00",
-        "end_time": "16:00"
+        "end_time": "16:00",
+
+        # Cedar attributes
+        "shift_type": "day",
+        "shift_hours": 8,
+        "hours_since_last_shift": 14,
+        "required_skill_level": 3,
+        "notice_hours": 24,
+        "required_experience_years": 2,
+        "minimum_performance_score": 80
     },
 
     {
@@ -120,7 +211,16 @@ shifts = [
         "employee_id": "E004",
         "date": "2026-09-16",
         "start_time": "08:00",
-        "end_time": "16:00"
+        "end_time": "16:00",
+
+        # Cedar attributes
+        "shift_type": "day",
+        "shift_hours": 8,
+        "hours_since_last_shift": 14,
+        "required_skill_level": 3,
+        "notice_hours": 24,
+        "required_experience_years": 2,
+        "minimum_performance_score": 80
     }
 ]
 
